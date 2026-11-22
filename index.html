@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>L.B.X. 深空信号监测站</title>
+<meta name="description" content="临渊深空信号监测站（L.B.X.）—— 负责深空射电信号的接收、记录与归档。">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="masthead-in">
+      <div class="brand-lock">
+        <div class="emblem">LBX</div>
+        <div class="brand-name">
+          <b>临渊深空信号监测站</b>
+          <span>LINYUAN DEEP-SPACE SIGNAL STATION</span>
+        </div>
+      </div>
+      <div class="mast-meta">
+        档案编号 LBX–0001<br>
+        本站内容依据《深空观测资料公开办法》节选发布
+      </div>
+    </div>
+  </header>
+
+  <nav class="mainnav">
+    <ul>
+      <li><a href="index.html" class="cur">本站首页</a></li>
+      <li><a href="news.html">观测公告</a></li>
+      <li><a href="research.html">研究方向</a></li>
+      <li><a href="personnel.html">人员名录</a></li>
+      <li><a href="archive.html">资料档案室</a></li>
+      <li><a href="logs.html">值班日志</a></li>
+    </ul>
+  </nav>
+
+  <div class="cols">
+    <main>
+      <div class="pagehead">
+        <h1>关于本站</h1>
+        <div class="sub">ESTABLISHED 1978 · 隶属于国家深空探测协调委员会（虚构）</div>
+      </div>
+
+      <p class="lede">临渊深空信号监测站（以下简称"本站"）成立于一九七八年，是我国最早的深空射电信号接收与归档机构之一。四十余年来，本站持续对指定天区进行全天候监听，累计形成观测记录 <span class="mono">44</span> 类、原始磁带 <span class="mono">2,317</span> 盒。</p>
+
+      <p>本站的主要职责包括：接收并记录来自深空的自然及人工射电信号；对信号进行编号、分类与长期归档；配合上级主管部门完成相关数据的保管与移交工作。</p>
+
+      <h2>观测状态</h2>
+      <div class="terminal" id="statusTerm">
+<span class="g">[ SYSTEM ]</span> 阵列状态 ........ 正常
+<span class="g">[ SYSTEM ]</span> 接收频段 ........ 1420 MHz / 109.7 MHz
+<span class="a">[ NOTICE ]</span> 当前监听天区 ... 天鹅座 X-1 邻近区域
+<span class="g">[ SYSTEM ]</span> 本日累计接收 ... 18 段
+<span class="r">[  WARN  ]</span> 未识别信号 ...... <span id="uncount">0</span> 段 <span class="blink">_</span></div>
+
+      <h2>公开资料</h2>
+      <p>依据信息公开相关规定，本站已陆续将部分非涉密观测资料整理上网。目前开放的栏目包括观测公告、研究人员名录及已解密的历史档案。涉及尚未完成复核的观测记录，暂不列入公开范围。</p>
+
+      <div class="notice">
+        <div class="date">2025.11.14</div>
+        <a href="news.html#n1">关于深空监听阵列例行维护的公告</a>
+      </div>
+      <div class="notice">
+        <div class="date">2025.09.02</div>
+        <a href="news.html#n2">第 43 批观测数据完成归档的说明</a>
+      </div>
+      <div class="notice">
+        <div class="date">1998.11.14</div>
+        <a href="news.html" class="ghost">第 44 号观测记录内部通报（此链接由系统自动生成）</a>
+      </div>
+
+      <hr class="rule">
+      <p class="small">本站为虚构作品，文中所有机构、人物、编号、事件均不存在，如有雷同纯属巧合。本站不收集任何真实个人信息，所有解谜进度仅保存在您的浏览器本地。</p>
+    </main>
+
+    <aside>
+      <div class="sidebox">
+        <h4>站点索引</h4>
+        <div class="body">
+          <p><a href="research.html">→ 研究方向与频段</a></p>
+          <p><a href="personnel.html">→ 历任研究人员</a></p>
+          <p><a href="archive.html">→ 资料档案室</a></p>
+          <p><a href="logs.html">→ 值班日志查询</a></p>
+        </div>
+      </div>
+      <div class="sidebox">
+        <h4>常用频段</h4>
+        <div class="body mono small">
+          1420.406 MHz — 氢原子谱线<br>
+          1662 MHz — 羟基谱线<br>
+          109.7 MHz — 备用监测<br>
+          <span class="danger">—— MHz — 已停用</span>
+        </div>
+      </div>
+      <div class="sidebox">
+        <h4>访问计数</h4>
+        <div class="body">
+          您是本站第 <span class="mono danger" id="visits">000000</span> 位访问者。
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <footer class="foot">
+    <div class="foot-in">
+      <div>© 1978–2025 临渊深空信号监测站 · 虚构机构<br>本站最后更新于 <span class="mono" id="lastmod">2025-11-14 03:17:44 UTC</span></div>
+      <div>技术支持：LBX 数据中心<br><a href="assets/style.css">样式表</a> · <a href="assets/app.js">系统脚本</a></div>
+    </div>
+  </footer>
+</div>
+<script src="assets/app.js"></script>
+<script>
+(function(){
+  // 访问计数（本地伪计数，纯氛围）
+  var v=0;try{v=parseInt(localStorage.getItem('lbx_visits')||'0',10)||0}catch(e){}
+  v++;try{localStorage.setItem('lbx_visits',''+v)}catch(e){}
+  document.getElementById('visits').textContent=('000000'+v).slice(-6);
+
+  // 未识别信号数量：随解谜进度上升
+  var p=window.LBX.get(),n=0;
+  if(p.clock)n+=1;if(p.badge)n+=3;if(p.staff)n+=7;if(p.access)n+=12;
+  var el=document.getElementById('uncount');var target=n,cur=0;
+  setInterval(function(){if(cur<target){cur++;el.textContent=cur}},140);
+})();
+</script>
+</body>
+</html>
