@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>人员名录 — L.B.X.</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="masthead"><div class="masthead-in">
+    <div class="brand-lock"><div class="emblem">LBX</div>
+      <div class="brand-name"><b>临渊深空信号监测站</b><span>LINYUAN DEEP-SPACE SIGNAL STATION</span></div></div>
+    <div class="mast-meta">档案编号 LBX–0004<br>人员名录 · 公开部分</div>
+  </div></header>
+  <nav class="mainnav"><ul>
+    <li><a href="index.html">本站首页</a></li><li><a href="news.html">观测公告</a></li>
+    <li><a href="research.html">研究方向</a></li><li><a href="personnel.html" class="cur">人员名录</a></li>
+    <li><a href="archive.html">资料档案室</a></li><li><a href="logs.html">值班日志</a></li>
+  </ul></nav>
+
+  <div class="cols"><main>
+    <div class="pagehead"><h1>历任研究人员</h1><div class="sub">PERSONNEL · 仅列出已脱敏的公开信息</div></div>
+    <p class="lede">以下名录收录本站部分研究人员的基本信息。出于隐私保护，仅公布姓氏、工号与在职状态。状态一栏中，「在职」「调离」「退休」为常态；<span class="danger">「失联」</span>为特殊状态，另行说明。</p>
+
+    <table class="data">
+      <thead><tr><th>工号</th><th>姓氏</th><th>职务</th><th>状态</th></tr></thead>
+      <tbody>
+        <tr><td class="mono">TD-1138</td><td>周</td><td>值班调度</td><td>在职</td></tr>
+        <tr><td class="mono">TD-2205</td><td>陈</td><td>信号分析</td><td>调离</td></tr>
+        <tr><td class="mono" style="background:#efe6d8"><b>TD-4471</b></td><td>林</td><td>资料复核</td><td class="danger">失联</td></tr>
+        <tr><td class="mono">TD-3306</td><td>吴</td><td>阵列维护</td><td>退休</td></tr>
+        <tr><td class="mono">TD-5512</td><td>赵</td><td>档案保管</td><td>在职</td></tr>
+      </tbody>
+    </table>
+
+    <div class="puzzle" id="staffBox">
+      <h3>状态说明 · TD-4471</h3>
+      <p style="font-size:13.5px">林同志自 1998 年 11 月起状态标记为「失联」。其经手的第 43、44 批观测记录已由他人接管。本站仍保留其授权工号，用于历史档案的查阅验证。</p>
+      <p class="small">提示：档案室的授权验证，接受仍在系统中的工号。</p>
+      <button id="staffAck" style="margin-left:0">记录此工号</button>
+      <div class="hint" id="staffDone" style="display:none;color:var(--danger)">已记录。档案室的门开着了。</div>
+    </div>
+
+    <hr class="rule">
+    <p class="small">「失联」指人员无法通过常规方式取得联系、且未办理调离或退休手续的状态。本站不对失联人员的情况作进一步说明。</p>
+  </main>
+  <aside>
+    <div class="sidebox"><h4>工号规则</h4><div class="body mono small">TD-四位数字<br>前两位为入职批次<br><br>工号在人员调离后保留，用于档案追溯。</div></div>
+    <div class="sidebox"><h4>提示</h4><div class="body">档案室需要授权工号。失联人员的工号通常仍然有效——因为没有人办理注销。</div></div>
+  </aside></div>
+
+  <footer class="foot"><div class="foot-in"><div>© 1978–2025 临渊深空信号监测站 · 虚构机构</div><div>档案编号 LBX–0004</div></div></footer>
+</div>
+<script src="assets/app.js"></script>
+<script>
+document.getElementById('staffAck').addEventListener('click',function(){
+  window.LBX.mark('staff');
+  document.getElementById('staffDone').style.display='block';
+});
+</script>
+</body>
+</html>
