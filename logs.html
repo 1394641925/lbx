@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>值班日志 — L.B.X.</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="masthead"><div class="masthead-in">
+    <div class="brand-lock"><div class="emblem">LBX</div>
+      <div class="brand-name"><b>临渊深空信号监测站</b><span>LINYUAN DEEP-SPACE SIGNAL STATION</span></div></div>
+    <div class="mast-meta">档案编号 LBX–0006<br>值班日志 · 检索系统</div>
+  </div></header>
+  <nav class="mainnav"><ul>
+    <li><a href="index.html">本站首页</a></li><li><a href="news.html">观测公告</a></li>
+    <li><a href="research.html">研究方向</a></li><li><a href="personnel.html">人员名录</a></li>
+    <li><a href="archive.html">资料档案室</a></li><li><a href="logs.html" class="cur">值班日志</a></li>
+  </ul></nav>
+
+  <div class="cols"><main>
+    <div class="pagehead"><h1>值班日志检索</h1><div class="sub">DUTY LOG · 按频段检索历史记录</div></div>
+
+    <div id="lgate">
+      <p class="lede">本系统保存历次值班观测的原始日志。请输入频段数值作为检索键。</p>
+      <div class="puzzle">
+        <h3>频段检索</h3>
+        <label>检索键（频段 MHz）</label>
+        <input type="text" id="logInput" placeholder="例如 1420.406" autocomplete="off">
+        <button id="logGo">检索</button>
+        <div class="err" id="logErr">未检索到该频段的日志记录。</div>
+        <div class="hint">提示：#44 记录所用频段；亦见于首页「常用频段」中标注为封存的那一行。</div>
+      </div>
+    </div>
+
+    <div id="lcontent" style="display:none">
+      <h2>值班日志 · 1998-11-14 夜班</h2>
+      <div class="terminal">
+<span class="a">[ 值班员 ]</span> TD-4471
+<span class="a">[ 频段 ]</span> 109.7 MHz
+<span class="a">[ 交接 ]</span> 未完成
+
+  03:17 信号出现。周期性。持续 11 分 38 秒。
+  03:21 尝试判读。结构不符合任何已知编码。
+  03:26 发现重复单元，疑为 Morse。抄录如下：
+
+<span class="g">  .. - / .. ... / -. --- - / .- / ... .. --. -. .- .-..</span>
+<span class="g">  .. - / .. ... / .- / .-. . .--. .-.. -.--</span>
+
+  03:31 第二次核对。手写笔记附后（见下）。
+  03:38 值班员离开观测室。未关闭接收机。
+  03:17 <span class="r">（本行时间戳异常，疑为录入错误）</span></div>
+
+      <div class="puzzle">
+        <h3>信号解码器</h3>
+        <label>将上述摩斯电码解码（用 / 表示单词间隔，空格表示字母间隔）</label>
+        <input type="text" id="morseInput" placeholder=".. - / .. ..." autocomplete="off" style="text-transform:none">
+        <button id="morseGo">解码</button>
+        <div class="err" id="morseErr">解码失败，请检查输入。</div>
+        <div class="hint">标准摩斯电码表：A=.-  E=.  I=..  R=.-.  S=...  T=-  V=...-  N=-.  O=---  G=--.  J=.---  P=.--.  Y=-.--  L=.-..  M=--</div>
+        <div id="morseOut" style="display:none;margin-top:16px">
+          <div class="terminal"><span class="g" id="morseText"></span></div>
+          <p style="margin-top:14px">解码完成。完成解码后，请前往 <a href="signal.html">信号回放</a> 页面，输入解码结果以调取这段记录的音频。</p>
+        </div>
+      </div>
+    </div>
+  </main>
+  <aside>
+    <div class="sidebox"><h4>摩斯电码</h4><div class="body small">点（.）与划（—）组成的编码。字母间以空格分隔，单词间以 / 分隔。<br><br>本站抄录的段落包含两个单词串。</div></div>
+    <div class="sidebox"><h4>异常提示</h4><div class="body small">日志末尾出现了一个<strong>早于记录本身</strong>的时间戳。档案部门认为系录入错误，未作处理。</div></div>
+  </aside></div>
+
+  <footer class="foot"><div class="foot-in"><div>© 1978–2025 临渊深空信号监测站 · 虚构机构</div><div>档案编号 LBX–0006</div></div></footer>
+</div>
+<script src="assets/app.js"></script>
+<script>
+(function(){
+  document.getElementById('logGo').addEventListener('click',check);
+  document.getElementById('logInput').addEventListener('keydown',function(e){if(e.key==='Enter')check()});
+  function check(){
+    var v=document.getElementById('logInput').value.trim();
+    if(v==='109.7'||v==='109.7 MHz'||v==='109.700'){
+      document.getElementById('lgate').style.display='none';
+      document.getElementById('lcontent').style.display='block';
+      window.LBX.mark('log');
+    }else{document.getElementById('logErr').classList.add('on')}
+  }
+  // 摩斯解码
+  var T={'.-':'A','-...':'B','-.-.':'C','-..':'D','.':'E','..-.':'F','--.':'G','....':'H','..':'I','.---':'J','-.-':'K','.-..':'L','--':'M','-.':'N','---':'O','.--.':'P','--.-':'Q','.-.':'R','...':'S','-':'T','..-':'U','...-':'V','.--':'W','-..-':'X','-.--':'Y','--..':'Z'};
+  document.getElementById('morseGo').addEventListener('click',function(){
+    var v=document.getElementById('morseInput').value.trim();
+    if(!v){return}
+    var words=v.split(/\s*\/\s*/),out='';
+    words.forEach(function(w){
+      w.split(/\s+/).forEach(function(code){
+        if(!code)return;
+        var ch=T[code];out+=(ch||'?');
+      });
+      out+=' ';
+    });
+    out=out.trim();
+    document.getElementById('morseText').textContent=out;
+    document.getElementById('morseOut').style.display='block';
+    window.LBX.mark('decoded');
+    // 存下解码结果供 signal.html 使用
+    try{localStorage.setItem('lbx_answer',out)}catch(e){}
+  });
+})();
+</script>
+</body>
+</html>
