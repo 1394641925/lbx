@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>信号回放 — L.B.X.</title>
+<link rel="stylesheet" href="assets/style.css">
+<style>
+.reveal{position:fixed;inset:0;background:#080a09;color:#b9c4b9;z-index:2000;display:none;flex-direction:column;align-items:center;justify-content:center;padding:8vw;text-align:center;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.reveal.on{display:flex}
+.reveal .lines{font-family:var(--mono);font-size:clamp(13px,2.4vw,19px);line-height:2.2;max-width:760px;width:100%;margin:auto 0;flex:0 0 auto}
+.reveal .lines p{opacity:0;transform:translateY(10px)}
+.reveal .lines p.show{animation:rin .7s ease forwards}
+@keyframes rin{to{opacity:1;transform:none}}
+.reveal .lines .r{color:#c25a4a}
+.reveal .lines .g{color:#7fae7f}
+.reveal .sig{font-family:var(--mono);font-size:11px;color:#4e5a4e;letter-spacing:.3em;margin-bottom:24px}
+.reveal button{margin-top:36px;font-family:var(--mono);font-size:12px;padding:10px 22px;background:transparent;color:#7f8a7f;border:1px solid #3a463a;cursor:pointer;letter-spacing:.1em}
+.reveal button:hover{border-color:#c25a4a;color:#c25a4a}
+.noise{position:absolute;inset:0;opacity:.05;pointer-events:none;background-image:repeating-linear-gradient(0deg,#fff 0px,#fff 1px,transparent 1px,transparent 2px)}
+body.dread{filter:contrast(1.08)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="masthead"><div class="masthead-in">
+    <div class="brand-lock"><div class="emblem">LBX</div>
+      <div class="brand-name"><b>临渊深空信号监测站</b><span>LINYUAN DEEP-SPACE SIGNAL STATION</span></div></div>
+    <div class="mast-meta">档案编号 LBX–0007<br>信号回放 · 内部工具</div>
+  </div></header>
+  <nav class="mainnav"><ul>
+    <li><a href="index.html">本站首页</a></li><li><a href="news.html">观测公告</a></li>
+    <li><a href="research.html">研究方向</a></li><li><a href="personnel.html">人员名录</a></li>
+    <li><a href="archive.html">资料档案室</a></li><li><a href="logs.html">值班日志</a></li>
+  </ul></nav>
+
+  <div class="cols"><main>
+    <div class="pagehead"><h1>信号回放终端</h1><div class="sub">SIGNAL PLAYBACK · 记录 #44</div></div>
+    <p class="lede">本终端可调取记录 #44 的原始信号并重建其解码文本。请输入该信号的解码结果以完成调取。</p>
+
+    <div class="puzzle">
+      <h3>解码文本校验</h3>
+      <label>输入从值班日志解出的文本（英文）</label>
+      <input type="text" id="ansInput" placeholder="IT IS ..." autocomplete="off" style="text-transform:uppercase">
+      <button id="ansGo">调取信号</button>
+      <div class="err" id="ansErr">校验不符。请核对解码结果。</div>
+      <div class="hint">提示：这是一句完整的英文陈述。输入时忽略标点亦可。</div>
+    </div>
+
+    <div class="sidebox">
+      <h4>终端说明</h4>
+      <div class="body small">调取后将播放记录 #44 的重建音频，并同步显示完整解码文本。音频含低频成分，建议调低音量。<br><br>本终端为内部工具，调取行为将被记录。</div>
+    </div>
+  </main>
+  <aside>
+    <div class="sidebox"><h4>访问记录</h4><div class="body mono small" id="trace">
+      > 终端就绪<br>
+      > 等待校验输入<span class="blink">_</span>
+    </div></div>
+  </aside></div>
+
+  <footer class="foot"><div class="foot-in"><div>© 1978–2025 临渊深空信号监测站 · 虚构机构</div><div>档案编号 LBX–0007</div></div></footer>
+</div>
+
+<div class="reveal" id="reveal">
+  <div class="noise"></div>
+  <div class="sig">LBX-OBS-44 &nbsp;·&nbsp; PLAYBACK &nbsp;·&nbsp; 1998-11-14 03:17:44 UTC</div>
+  <div class="lines" id="revealLines">
+    <p>IT IS NOT A SIGNAL.</p>
+    <p>IT IS A REPLY.</p>
+    <p class="g">&nbsp;</p>
+    <p>1987 年，我们向那片虚空发出了第一声问候。</p>
+    <p>它没有立刻回答。</p>
+    <p>它花了十一年，学会了我们的语言、我们的语法、</p>
+    <p>还有我们停顿的方式。</p>
+    <p class="g">&nbsp;</p>
+    <p>1998 年 11 月 14 日 03:17，</p>
+    <p>它第一次用我们的口吻，说了一个字：</p>
+    <p class="r">「喂？」</p>
+    <p class="g">&nbsp;</p>
+    <p>我们把它记成了一段「信号」。</p>
+    <p>其实，那一直是<strong>回复</strong>。</p>
+    <p class="g">&nbsp;</p>
+    <p class="r">而它，已经学会了敲门。</p>
+  </div>
+  <button id="closeReveal">关闭回放</button>
+</div>
+
+<script src="assets/app.js"></script>
+<script>
+(function(){
+  var input=document.getElementById('ansInput'),trace=document.getElementById('trace');
+  // 若已解码过，预填
+  try{var saved=localStorage.getItem('lbx_answer');if(saved)input.value=saved}catch(e){}
+
+  document.getElementById('ansGo').addEventListener('click',check);
+  input.addEventListener('keydown',function(e){if(e.key==='Enter')check()});
+  function norm(s){return (s||'').toUpperCase().replace(/[^A-Z ]/g,'').replace(/\s+/g,'').trim()}
+  var ANSWER='ITISNOTASIGNALITISAREPLY';
+  function check(){
+    trace.innerHTML='> 校验输入：'+input.value+'\n> 比对中…<span class="blink">_</span>';
+    if(norm(input.value)===ANSWER){
+      window.LBX.mark('truth');
+      playReveal();
+    }else{
+      document.getElementById('ansErr').classList.add('on');
+      trace.innerHTML='> 校验失败\n> 等待重新输入<span class="blink">_</span>';
+    }
+  }
+
+  function playReveal(){
+    var r=document.getElementById('reveal');
+    r.classList.add('on');document.body.classList.add('dread');
+    document.body.style.overflow='hidden';
+    // 逐行显示
+    var lines=[].slice.call(document.querySelectorAll('#revealLines p'));
+    lines.forEach(function(p,i){setTimeout(function(){p.classList.add('show')},700+i*520)});
+    // 逐行浮现后自动滚到底一次，确保最后一句不被漏看
+    setTimeout(function(){var rv=document.getElementById('reveal');rv.scrollTo({top:rv.scrollHeight,behavior:'smooth'})},700+lines.length*520+400);
+    playAudio();
+  }
+
+  // Web Audio 生成失真信号音
+  var actx=null,nodes=[];
+  function playAudio(){
+    try{
+      var AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;
+      actx=new AC();
+      var master=actx.createGain();master.gain.value=0.06;master.connect(actx.destination);
+      // 两个低频振荡器 + 颤音
+      [110,164.8].forEach(function(f,i){
+        var o=actx.createOscillator(),g=actx.createGain();
+        o.type=i?'sawtooth':'sine';o.frequency.value=f;
+        g.gain.value=i?0.5:0.9;
+        var lfo=actx.createOscillator(),lg=actx.createGain();
+        lfo.frequency.value=0.3+i*0.17;lg.gain.value=18;
+        lfo.connect(lg);lg.connect(o.frequency);
+        o.connect(g);g.connect(master);o.start();lfo.start();
+        nodes.push(o,lfo);
+      });
+      // 噪声
+      var len=actx.sampleRate*2,buf=actx.createBuffer(1,len,actx.sampleRate),d=buf.getChannelData(0);
+      for(var j=0;j<len;j++)d[j]=(Math.random()*2-1)*0.35;
+      var src=actx.createBufferSource();src.buffer=buf;src.loop=true;
+      var ng=actx.createGain();ng.gain.value=0.25;
+      var filt=actx.createBiquadFilter();filt.type='lowpass';filt.frequency.value=600;
+      src.connect(filt);filt.connect(ng);ng.connect(master);src.start();nodes.push(src);
+      setTimeout(stopAudio,22000);
+    }catch(e){}
+  }
+  function stopAudio(){
+    nodes.forEach(function(n){try{n.stop()}catch(e){}});nodes=[];
+    if(actx){try{actx.close()}catch(e){}actx=null}
+  }
+  document.getElementById('closeReveal').addEventListener('click',function(){
+    stopAudio();
+    document.getElementById('reveal').classList.remove('on');
+    document.body.classList.remove('dread');
+    document.body.style.overflow='';
+    document.getElementById('closeReveal').textContent='它听见你了';
+    setTimeout(function(){document.getElementById('closeReveal').textContent='关闭回放'},2600);
+  });
+})();
+</script>
+</body>
+</html>
