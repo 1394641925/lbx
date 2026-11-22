@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>资料档案室 — L.B.X.</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="masthead"><div class="masthead-in">
+    <div class="brand-lock"><div class="emblem">LBX</div>
+      <div class="brand-name"><b>临渊深空信号监测站</b><span>LINYUAN DEEP-SPACE SIGNAL STATION</span></div></div>
+    <div class="mast-meta">档案编号 LBX–0005<br>资料档案室 · 授权访问</div>
+  </div></header>
+  <nav class="mainnav"><ul>
+    <li><a href="index.html">本站首页</a></li><li><a href="news.html">观测公告</a></li>
+    <li><a href="research.html">研究方向</a></li><li><a href="personnel.html">人员名录</a></li>
+    <li><a href="archive.html" class="cur">资料档案室</a></li><li><a href="logs.html">值班日志</a></li>
+  </ul></nav>
+
+  <div class="cols"><main>
+    <div class="pagehead"><h1>资料档案室</h1><div class="sub">ARCHIVE · 已解密观测记录</div></div>
+
+    <div id="gate">
+      <p class="lede">本栏目存放已完成解密的观测记录。依据《观测记录分级办法》，查阅需出示有效授权工号。</p>
+      <div class="puzzle">
+        <h3>授权验证</h3>
+        <label>请输入授权工号</label>
+        <input type="text" id="arcInput" placeholder="TD-0000" autocomplete="off">
+        <button id="arcGo">验证</button>
+        <div class="err" id="arcErr">工号无效，或该工号无查阅权限。</div>
+        <div class="hint">提示：查阅第 43、44 批复核记录的授权工号，见人员名录中标记为「失联」的人员。</div>
+      </div>
+    </div>
+
+    <div id="content" style="display:none">
+      <h2>观测记录 #44</h2>
+      <div class="terminal">
+<span class="a">[ 记录 ]</span> LBX-OBS-44
+<span class="a">[ 时间 ]</span> 1998-11-14 03:17:44 UTC
+<span class="a">[ 频段 ]</span> <span class="g" id="freqReveal">109.7 MHz</span>
+<span class="a">[ 时长 ]</span> 00:11:38
+<span class="a">[ 分类 ]</span> <span class="r">R（应答型 · 已停用）</span>
+
+  信号包含周期性结构。经判读，其重复模式
+  与人类语言的<strong>应答节奏</strong>高度相似。
+
+  复核负责人：TD-4471（状态：失联）
+  记录状态：封存 · 待二次复核
+
+<span class="r">  注：本记录的完整解码结果存于值班日志，
+  检索键为上述频段数值。</span></div>
+
+      <h2>交接附注</h2>
+      <p>林同志失联后，其保管的解码手册下落不明。值班日志系统保留了对该记录的检索入口，检索键为信号频段。据档案记载，该频段数值亦多次出现在仪器面板的备用刻度上。</p>
+
+      <div class="sidebox" style="margin-top:18px">
+        <h4>检索键</h4>
+        <div class="body mono"><span id="keyShow">109.7</span> — 请在 <a href="logs.html">值班日志</a> 中使用此数值检索。</div>
+      </div>
+    </div>
+  </main>
+  <aside>
+    <div class="sidebox"><h4>分级办法</h4><div class="body small">公开 / 内部 / 保密 / 封存<br><br>#44 记录当前为「封存」级，仅授权人员可查阅本页所示节选。</div></div>
+    <div class="sidebox"><h4>档案编号</h4><div class="body mono small">LBX-OBS-##<br>共 44 类记录<br>第 44 类为最后一类</div></div>
+  </aside></div>
+
+  <footer class="foot"><div class="foot-in"><div>© 1978–2025 临渊深空信号监测站 · 虚构机构</div><div>档案编号 LBX–0005</div></div></footer>
+</div>
+<script src="assets/app.js"></script>
+<script>
+(function(){
+  var done=function(){
+    document.getElementById('gate').style.display='none';
+    document.getElementById('content').style.display='block';
+    window.LBX.mark('access');
+  };
+  document.getElementById('arcGo').addEventListener('click',check);
+  document.getElementById('arcInput').addEventListener('keydown',function(e){if(e.key==='Enter')check()});
+  function check(){
+    var v=document.getElementById('arcInput').value.trim().toUpperCase();
+    if(v==='TD-4471'){done()}
+    else{document.getElementById('arcErr').classList.add('on')}
+  }
+})();
+</script>
+</body>
+</html>
