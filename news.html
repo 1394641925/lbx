@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>观测公告 — L.B.X.</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="masthead">
+    <div class="masthead-in">
+      <div class="brand-lock"><div class="emblem">LBX</div>
+        <div class="brand-name"><b>临渊深空信号监测站</b><span>LINYUAN DEEP-SPACE SIGNAL STATION</span></div></div>
+      <div class="mast-meta">档案编号 LBX–0002<br>公告栏目 · 公开发布</div>
+    </div>
+  </header>
+  <nav class="mainnav"><ul>
+    <li><a href="index.html">本站首页</a></li>
+    <li><a href="news.html" class="cur">观测公告</a></li>
+    <li><a href="research.html">研究方向</a></li>
+    <li><a href="personnel.html">人员名录</a></li>
+    <li><a href="archive.html">资料档案室</a></li>
+    <li><a href="logs.html">值班日志</a></li>
+  </ul></nav>
+
+  <div class="cols"><main>
+    <div class="pagehead"><h1>观测公告</h1><div class="sub">OBSERVATION BULLETIN · 共 3 条</div></div>
+
+    <div class="notice" id="n1">
+      <div class="date">2025.11.14 · 编号 A-2509</div>
+      <a>关于深空监听阵列例行维护的公告</a>
+      <p class="small" style="margin-top:8px">本站将于本月对 1420 MHz 接收链路进行例行维护，维护期间部分频段暂停监听。由此带来的不便，敬请谅解。值班调度：<span class="mono">TD-1138</span>。</p>
+    </div>
+
+    <div class="notice" id="n2">
+      <div class="date">2025.09.02 · 编号 A-2506</div>
+      <a>第 43 批观测数据完成归档的说明</a>
+      <p class="small" style="margin-top:8px">第 43 批（共 <span class="mono">118</span> 段）观测记录已完成复核并归入档案室。复核由资料室 <span class="mono">TD-4471</span> 同志主持完成。</p>
+    </div>
+
+    <div class="notice">
+      <div class="date">1998.11.14 · 编号 <span class="danger">A-9811</span></div>
+      <a href="#" id="lockedNotice" style="color:var(--ink-3)">第 44 号观测记录内部通报 <span class="tag">需授权</span></a>
+      <p class="small" style="margin-top:8px">该记录尚未解除保密期。依据规定，仅持有效授权工号的内部人员可查阅。授权工号见<a href="personnel.html">人员名录</a>。</p>
+    </div>
+
+    <div class="puzzle" id="verifyBox" style="display:none">
+      <h3>身份核验</h3>
+      <label>请输入您的授权工号以查阅该通报</label>
+      <input type="text" id="badgeInput" placeholder="例如 TD-0000" autocomplete="off">
+      <button id="badgeGo">提交</button>
+      <div class="err" id="badgeErr">工号无效，或该工号无权访问此记录。</div>
+      <div class="hint">提示：主持第 43 批复核工作的同志，其工号出现在本页上方。</div>
+    </div>
+
+    <div id="noticeOpen" style="display:none">
+      <hr class="rule">
+      <h2>内部通报 A-9811（节选）</h2>
+      <div class="terminal">
+<span class="a">[ 分类 ]</span> 内部 · 限授权人员
+<span class="a">[ 主题 ]</span> 关于第 44 号观测记录的处理意见
+
+  1998 年 11 月 14 日 03:17（UTC），备用频段
+  109.7 MHz 接收到一段持续信号。该信号特征与
+  既往任何已知自然射电源均不相符。
+
+  经初步判读，信号包含周期性重复的结构，
+  形似某种 <span class="r">「应答」</span> 而非「播送」。
+
+  处理意见：该记录暂缓公开，移交档案室封存，
+  编号 <span class="g">#44</span>。复核负责人 TD-4471。
+
+<span class="r">  ……以下内容已脱敏……</span></div>
+      <p class="small" style="margin-top:12px">查阅完整记录请前往 <a href="archive.html">资料档案室</a>，并出示授权工号。</p>
+    </div>
+  </main>
+  <aside>
+    <div class="sidebox"><h4>栏目说明</h4><div class="body">本栏目发布本站的例行公告、数据归档说明及内部通报（节选）。标注「需授权」的内容仅对持有效工号人员开放。</div></div>
+    <div class="sidebox"><h4>公告编号规则</h4><div class="body mono small">A-年号+序号<br>例：A-2509 = 2025 年第 9 号<br><br>内部通报以 A-98xx 起编。</div></div>
+  </aside></div>
+
+  <footer class="foot"><div class="foot-in"><div>© 1978–2025 临渊深空信号监测站 · 虚构机构</div><div>档案编号 LBX–0002</div></div></footer>
+</div>
+<script src="assets/app.js"></script>
+<script>
+(function(){
+  var link=document.getElementById('lockedNotice');
+  link.addEventListener('click',function(e){e.preventDefault();document.getElementById('verifyBox').style.display='block';document.getElementById('badgeInput').focus()});
+  document.getElementById('badgeGo').addEventListener('click',check);
+  document.getElementById('badgeInput').addEventListener('keydown',function(e){if(e.key==='Enter')check()});
+  function check(){
+    var v=document.getElementById('badgeInput').value.trim().toUpperCase();
+    if(v==='TD-4471'){
+      document.getElementById('verifyBox').style.display='none';
+      document.getElementById('noticeOpen').style.display='block';
+      window.LBX.mark('badge');
+      document.getElementById('noticeOpen').scrollIntoView({behavior:'smooth'});
+    }else{
+      document.getElementById('badgeErr').classList.add('on');
+    }
+  }
+})();
+</script>
+</body>
+</html>
